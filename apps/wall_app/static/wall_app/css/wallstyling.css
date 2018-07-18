@@ -22,7 +22,10 @@ form{
     margin-left:10%;
     width: 80%;
 }
-.btn{
+.btn-primary{
+    margin: 1% 0% 0% 88%;
+}
+.btn-success{
     margin: 1% 0% 0% 88%;
 }
 h5{

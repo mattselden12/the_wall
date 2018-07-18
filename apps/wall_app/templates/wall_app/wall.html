@@ -8,15 +8,6 @@
     <title>The Wall Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'wall_app/css/wallstyling.css' %}">
-    <style>
-    .deletemessage{
-        display:inline-block;
-        border: 2px dotted red;
-    }
-    .messagepuser{
-        display:inline-block;
-    }
-    </style>
 </head>
 <body>
     <div id="topbar">
@@ -32,15 +23,17 @@
             <button type="submit" class="btn btn-primary">Post a message</button>
         </form>
         {% for this_message in all_messages %}
+            {% if this_message.messagepuser_id == request.session.userid %}
+                <form action = "/deletemessage/" method = "post" class = "deletemessage">
+                    {% csrf_token %}
+                    <input type = "hidden" name = "messageid" value = "{{ this_message.id }}">
+                    <button type = "submit" class = "btn btn-danger">Delete</button>
+                </form>
+            {% endif %}
             <form action = "/postcomment/" method = "post">
                 {% csrf_token %}
                 <input type="hidden" name= "messageid" value = "{{ this_message.id }}">
                 <h6 class = "messagepuser">{{ this_message.messagepuser.first_name }} {{ this_message.messagepuser.last_name }} - {{ this_message.created_at }}</h6>
-                    <!-- <form action = "/deletemessage/" method = "post" class = "deletemessage">
-                        {% csrf_token %}
-                        <input type = "hidden" name = "messageid" value = "{{ this_message.id }}">
-                        <button type = "submit" class = "btn btn-danger">Delete</button>
-                    </form> -->
                 <p class = "message">{{ this_message.message }}</p>
                 {% for this_comment in all_comments %}
                     {% if this_comment.commentpmessage_id == this_message.id %}
