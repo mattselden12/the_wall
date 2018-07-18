@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>The Wall Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_app/css/wallstyling.css' %}">
+    <style>
+    .deletemessage{
+        display:inline-block;
+        border: 2px dotted red;
+    }
+    .messagepuser{
+        display:inline-block;
+    }
+    </style>
+</head>
+<body>
+    <div id="topbar">
+        <h3>CodingDojo Wall</h3>
+        <h5 id="topwelcome">Welcome {{ request.session.first_name }}</h5>
+        <a href='/logoff'>log off</a>
+    </div>
+    <div id="main">
+        <form action = "/postmessage/" method = "post">
+            {% csrf_token %}
+            <h4>Post a message</h4>
+            <textarea class="form-control" rows="3" name = "message"></textarea>
+            <button type="submit" class="btn btn-primary">Post a message</button>
+        </form>
+        {% for this_message in all_messages %}
+            <form action = "/postcomment/" method = "post">
+                {% csrf_token %}
+                <input type="hidden" name= "messageid" value = "{{ this_message.id }}">
+                <h6 class = "messagepuser">{{ this_message.messagepuser.first_name }} {{ this_message.messagepuser.last_name }} - {{ this_message.created_at }}</h6>
+                    <!-- <form action = "/deletemessage/" method = "post" class = "deletemessage">
+                        {% csrf_token %}
+                        <input type = "hidden" name = "messageid" value = "{{ this_message.id }}">
+                        <button type = "submit" class = "btn btn-danger">Delete</button>
+                    </form> -->
+                <p class = "message">{{ this_message.message }}</p>
+                {% for this_comment in all_comments %}
+                    {% if this_comment.commentpmessage_id == this_message.id %}
+                        <h6 class = "commentpuser">{{ this_comment.commentpuser.first_name }} {{ this_comment.commentpuser.last_name }} - {{ this_comment.created_at }}</h6>
+                        <p class = "comment">{{ this_comment.comment }}</p>
+                    {% endif %}
+                {% endfor %}
+                <h5>Post a comment</h5>
+                <textarea class="form-control ctext" rows="3" name = "comment"></textarea>
+                <button type="submit" class="btn btn-success">Post a comment</button>
+            </form>
+        {% endfor %}
+    </div>
+</body>
+</html>

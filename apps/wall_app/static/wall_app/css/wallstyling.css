@@ -1,0 +1,49 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+h3{
+    display: inline-block;
+    margin-left:1%;
+    margin-top:1%;
+}
+#topwelcome{
+    display: inline-block;
+    margin-left:50%;
+    margin-right:5%;
+}
+#topbar{
+    border-bottom: 2px solid black;
+}
+h4{
+    margin: 2% 0% 1% 0%;
+}
+form{
+    margin-left:10%;
+    width: 80%;
+}
+.btn{
+    margin: 1% 0% 0% 88%;
+}
+h5{
+    margin: 2% 0% 1% 6%;
+}
+.messagepuser{
+    margin: 0% 0% 1% 0%;
+}
+.message{
+    margin: 0% 0% 1% 2%;
+}
+.commentpuser{
+    margin: 0% 0% 1% 4%;
+}
+.comment{
+    margin: 0% 0% 1% 6%;
+}
+.ctext{
+    margin: 0% 0% 0% 6%;
+    width: 95%;
+}
+#main{
+    margin-bottom: 3%;
+}

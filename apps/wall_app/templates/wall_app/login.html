@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Index Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wall_app/css/loginstyling.css' %}">
+</head>
+<body>
+    <h1>Registration</h1>
+    {% if messages %}
+        {% for message in messages %}
+            {% if 'login' not in message.extra_tags %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <form action='/register/' method='post'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" class="form-control" name="first_name">
+        </div>
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" class="form-control" name="last_name">
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+        <div class="form-group">
+            <label>Confirm Password:</label>
+            <input type="password" class="form-control" name="confirm">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <h1>Login</h1>
+    {% if messages %}
+        {% for message in messages %}
+            {% if 'login' in message.extra_tags %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <form action='/login/' method='post'>
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</body>
+</html>

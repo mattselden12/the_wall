@@ -1,0 +1,28 @@
+.form-control{
+    width: 50%;
+    display: inline-block;
+}
+label{
+    margin-right: 15%;
+    width: 23%;
+}
+form{
+    width: 700px;
+    padding: 1% 4% 1% 4%;
+}
+button{
+    box-shadow: 3px 3px black;
+    margin-left:76%;
+}
+.message{
+    color:red;
+    margin-bottom: 0%;
+    margin-left:2%;
+}
+.success{
+    color:green;
+    margin:2%;
+}
+h1{
+    margin:2% 0% 0% 2%;
+}
