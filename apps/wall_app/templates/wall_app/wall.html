@@ -24,11 +24,13 @@
         </form>
         {% for this_message in all_messages %}
             {% if this_message.messagepuser_id == request.session.userid %}
-                <form action = "/deletemessage/" method = "post" class = "deletemessage">
-                    {% csrf_token %}
-                    <input type = "hidden" name = "messageid" value = "{{ this_message.id }}">
-                    <button type = "submit" class = "btn btn-danger">Delete</button>
-                </form>
+                {% if this_message.created_at.date < datetime1 %}
+                    <form action = "/deletemessage/" method = "post" class = "deletemessage">
+                        {% csrf_token %}
+                        <input type = "hidden" name = "messageid" value = "{{ this_message.id }}">
+                        <button type = "submit" class = "btn btn-danger">Delete</button>
+                    </form>
+                {% endif %}
             {% endif %}
             <form action = "/postcomment/" method = "post">
                 {% csrf_token %}

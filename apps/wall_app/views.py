@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import User, Message, Comment
+import datetime
 import bcrypt
 
 def index(request):
@@ -40,6 +41,7 @@ def wall(request):
         context = {
             "all_messages" : Message.objects.all().order_by('-id'),
             "all_comments" : Comment.objects.all(),
+            "datetime1": datetime.datetime.now() - datetime.timedelta(minutes=20),
         }
         return render(request, 'wall_app/wall.html',context)
     else:
